@@ -1,0 +1,31 @@
+#!C:\Program Files\ActiveState Perl Dev Kit 7.3\bin\lib\pai.exe
+PAP-Version: 1.0
+Packer: C:\Program Files\ActiveState Perl Dev Kit 7.3\bin\perlctrl.exe
+Script: BOG.ctrl
+Cwd: P:\Bruce_Axtens\Internal\BOG
+Byref: 1
+Clean: 0
+Date: 2012-12-12 18:26:07
+Debug: 
+Dependent: 0
+Exe: BOG.dll
+Force: 1
+Hostname: VirtualXP-63912
+No-Compress: 0
+No-Logo: 0
+Runlib: 
+Shared: private
+Tmpdir: 
+Verbose: 0
+Version-Comments: 
+Version-CompanyName: 
+Version-FileDescription: 
+Version-FileVersion: 
+Version-InternalName: 
+Version-LegalCopyright: 
+Version-LegalTrademarks: 
+Version-OriginalFilename: 
+Version-ProductName: 
+Version-ProductVersion: 
+Warnings: 0
+Xclude: 1

@@ -1,0 +1,295 @@
+package BOG;
+
+use strict 'vars';
+use warnings;
+use Win32::OLE::Variant;
+use Geometry::Formula;
+
+our $geo;
+
+
+sub New {
+	$geo = Geometry::Formula->new;
+	return $geo;
+}
+sub Annulus {
+	my ($Formula) = shift;
+	my ($InnerRadius) = shift;
+	my ($OuterRadius) = shift;
+	return $geo->annulus( formula => $Formula, inner_radius => $InnerRadius, outer_radius => $OuterRadius );
+}
+sub Circle {
+	my ($Formula) = shift;
+	my ($Radius) = shift;
+	return $geo->circle( formula => $Formula, radius => $Radius );
+}
+sub Cone {
+	my ($Formula) = shift;
+	my ($Base) = shift;
+	my ($Height) = shift;
+	return $geo->cone( formula => $Formula, base => $Base, height => $Height );
+}
+sub Cube {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	return $geo->cube( formula => $Formula, a => $A );
+}
+sub Ellipse {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	my ($B) = shift;
+	return $geo->ellipse( formula => $Formula, a => $A, b => $B );
+}
+sub Ellipsoid {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	my ($B) = shift;
+	my ($C) = shift;
+	return $geo->ellipsoid( formula => $Formula, a => $A, b => $B, c => $C );
+}
+sub Equilateral_Triangle {
+	my ($Formula) = shift;
+	my ($Side) = shift;
+	return $geo->equilateral_triangle( formula => $Formula, side => $Side );
+}
+sub Frustum_of_Right_Circular_Cone {
+	my ($Formula) = shift;
+	my ($SlantHeight) = shift;
+	my ($LargeRadius) = shift;
+	my ($SmallRadius) = shift;
+	return $geo->frustum_of_right_circular_cone( formula => $Formula, slant_height => $SlantHeight, large_radius => $LargeRadius, small_radius => $SmallRadius );
+}
+sub Parallelogram {
+	my ($Formula) = shift;
+	my ($Base) = shift;
+	my ($Height) = shift;
+	return $geo->parallelogram( formula => $Formula, base => $Base, height => $Height );
+}
+sub Rectangle {
+	my ($Formula) = shift;
+	my ($Length) = shift;
+	my ($Width) = shift;
+	return $geo->rectangle( formula => $Formula, length => $Length, width => $Width );
+}
+sub Rectangular_Solid {
+	my ($Formula) = shift;
+	my ($Length) = shift;
+	my ($Width) = shift;
+	my ($Height) = shift;
+	return $geo->rectangular_solid( formula => $Formula, lenght => $Length, width => $Width, height => $Height );
+}
+sub Rhombus {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	my ($B) = shift;
+	return $geo->rhombus( formula => $Formula, a => $A, b => $B );
+}
+sub Right_Circular_Cone {
+	my ($Formula) = shift;
+	my ($Height) = shift;
+	my ($Radius) = shift;
+	return $geo->right_circular_cone( formula => $Formula, height => $Height, radius => $Radius );
+}
+sub Right_Circular_Cylinder {
+	my ($Formula) = shift;
+	my ($Height) = shift;
+	my ($Radius) = shift;
+	return $geo->right_circular_cylinder( formula => $Formula, height => $Height, radius => $Radius );
+}
+sub Sector_of_Circle {
+	my ($Formula) = shift;
+	my ($Radius) = shift;
+	my ($Theta) = shift;
+	return $geo->sector_of_circle( formula => $Formula, radius => $Radius, theta => $Theta );
+}
+sub Sphere {
+	my ($Formula) = shift;
+	my ($Radius) = shift;
+	return $geo->sphere( formula => $Formula, radius => $Radius );
+}
+sub Square {
+	my ($Formula) = shift;
+	my ($Side) = shift;
+	return $geo->square( formula => $Formula, side => $Side );
+}
+sub Torus {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	my ($B) = shift;
+	return $geo->torus( formula => $Formula, a => $A, b => $B );
+}
+sub Trapezoid {
+	my ($Formula) = shift;
+	my ($A) = shift;
+	my ($B) = shift;
+	my ($C_Height) = shift;
+	my ($D) = shift;
+	if ($Formula eq 'area') {
+		return $geo->trapezoid( formula => $Formula, a => $A, b => $B, height => $C_Height );
+	} else {
+		return $geo->trapezoid( formula => $Formula, a => $A, b => $B, c => $C_Height, d => $D );
+	}
+}
+sub Triangle {
+	my ($Formula) = shift;
+	my ($A_Base) = shift;
+	my ($B_Height) = shift;
+	my ($C) = shift;
+	if ( $Formula eq 'area' ) {
+		return $geo->triangle( formula => $Formula, base => $A_Base, height => $B_Height );
+	} else {
+		return $geo->triangle( formula => $Formula, a => $A_Base, b => $B_Height, c => $C );
+	}
+}
+sub Squared {
+	my ($Value) = shift;
+	return $geo->_squared($Value);
+}
+sub Cubed {
+	my ($Value) = shift;
+	return $geo->_cubed($Value);
+}
+#~ sub Param_Check {
+	#~ my ($Function) = shift;
+	#~ my (@Params) = shift;
+	#~ return $geo->_param_check($F;
+#~ }
+
+=pod
+
+=begin PerlCtrl
+    %TypeLib = (
+	PackageName     => 'BOG',
+        DocString       => 'PerlCtrl wrap of Geometry::Formula',
+	TypeLibGUID     => '{543AE434-0587-42CB-8DE6-87681BF53C11}', # do NOT edit this line
+	ControlGUID     => '{B41CF4DF-ABAA-4751-A024-773F6791BD3C}', # do NOT edit this line either
+	DispInterfaceIID=> '{E97079BD-3EB0-4F86-9A8B-8380A78E3E01}', # or this one
+	ControlName     => 'BOGControl',
+	ControlVer      => 1,  # increment if new object with same ProgID
+			       # create new GUIDs as well
+	ProgID          => 'BOG.Axtension',
+        LCID            => 0,
+	Methods         => {
+'New' => { DocString => 'Returns a reference to a new formula object. No arguments currently needed or required.', 
+	RetType => VT_DISPATCH, 
+	TotalParams => 0, 
+	NumOptionalParams => 0, 
+	ParamList => [] },
+'Annulus' => { DocString => 'The annulus method provides an area formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, InnerRadius => VT_R8, OuterRadius => VT_R8] },
+'Circle' => { DocString => 'The circle method provides an area, circumference, and diameter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Radius => VT_R8] },
+'Cone' => { DocString => 'The cone method provides a volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Base => VT_R8, Height => VT_R8] },
+'Cube' => { DocString => 'The cube method provides a surface area and volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8] },
+'Ellipse' => { DocString => 'The ellipse method provides an area and perimeter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8, B => VT_R8] },
+'Ellipsoid' => { DocString => 'The ellipsoid method provides a volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 4, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8, B => VT_R8, C => VT_R8] },
+'Equilateral_Triangle' => { DocString => 'The equalateral_triangle method provides an area formula.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Side => VT_R8] },
+'Frustum_of_Right_Circular_Cone' => { DocString => 'The frustum_of_right_circular_cone method provides a lateral_surface_area, total_surface_area, and volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 4, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, SlantHeight => VT_R8, LargeRadius => VT_R8, SmallRadius => VT_R8] },
+'Parallelogram' => { DocString => 'The parallelogram method provides an area and perimeter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Base => VT_R8, Height => VT_R8] },
+'Rectangle' => { DocString => 'The rectangle method provides an area and perimeter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Length => VT_R8, Width => VT_R8] },
+'Rectangular_Solid' => { DocString => 'The rectangular_solid method provides an and perimeter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 4, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Length => VT_R8, Width => VT_R8, Height => VT_R8] },
+'Rhombus' => { DocString => 'The rhombus method provides an area formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8, B => VT_R8] },
+'Right_Circular_Cone' => { DocString => 'The right_circular_cone method provides a lateral surface area formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Height => VT_R8, Radius => VT_R8] },
+'Right_Circular_Cylinder' => { DocString => 'The right_circular_cylinder method provides a side surface area, total surface area, and volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Height => VT_R8, Radius => VT_R8] },
+'Sector_of_Circle' => { DocString => 'The sector_of_circle method provides an area formula. Theta in degrees.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Radius => VT_R8, Theta => VT_R8] },	
+'Sphere' => { DocString => 'The sphere method provides a surface area and volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Radius => VT_R8] },
+'Square' => { DocString => 'The square method provides an area and perimeter formula.', 
+	RetType => VT_R8, 
+	TotalParams => 2, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, Side => VT_R8] },
+'Torus' => { DocString => 'The torus method provides a surface area and volume formula.', 
+	RetType => VT_R8, 
+	TotalParams => 3, 
+	NumOptionalParams => 0, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8, B => VT_R8] },
+'Trapezoid' => { DocString => 'The trapezoid method provides an area and perimeter formula (perimeter uses 5th parameter).', 
+	RetType => VT_R8, 
+	TotalParams => 5, 
+	NumOptionalParams => 1, 
+	ParamList => [Formula => VT_BSTR, A => VT_R8, B => VT_R8, C_Height => VT_R8, D => VT_R8] },
+'Triangle' => { DocString => 'The triangle method provides an area and perimeter formula (perimeter uses 4th parameter)', 
+	RetType => VT_R8, 
+	TotalParams => 5, 
+	NumOptionalParams => 1, 
+	ParamList => [Formula => VT_BSTR, A_Base => VT_R8, B_Height => VT_R8, C => VT_R8] },
+'Squared' => { DocString => 'numeric values passed to this function get $self->_squared and returned.', 
+	RetType => VT_R8, 
+	TotalParams => 1, 
+	NumOptionalParams => 0, 
+	ParamList => [Value => VT_R8] },
+'Cubed' => { DocString => 'numeric values passed to this fucntion get$self->_cubed and returned', 
+	RetType => VT_R8, 
+	TotalParams => 1, 
+	NumOptionalParams => 0, 
+	ParamList => [Value => VT_R8] }
+	},  # end of 'Methods'
+	Properties        => {
+	},  # end of 'Properties'
+    );  # end of %TypeLib
+
+=end PerlCtrl
+
+=cut
